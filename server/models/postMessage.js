@@ -4,7 +4,12 @@ const postSchema = mongoose.Schema({
   title: String,
   categories: [String],
   description: String,
-  creaort: String,
+  creator: String,
+  exercises: [{
+    exercise: String,
+    reps: String,
+    weight: Number
+  }],
   likeCount: {
     type: Number,
     default: 0,
