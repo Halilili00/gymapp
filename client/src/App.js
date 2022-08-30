@@ -8,6 +8,7 @@ import ExerciseDetail from './pages/ExerciseDetail'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Form from './pages/Form'
+import Exercises from './components/Exercises'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
+        <Route path='/exercises' element={<Exercises/>}/>
         <Route path='/exercise/:id' element={<ExerciseDetail/>}/>
         <Route path='/form' element={<Form/>}/>
       </Routes>

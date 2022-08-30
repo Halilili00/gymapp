@@ -5,11 +5,11 @@ const Exercise = ({exercises}) => {
   return (
     <TableContainer component={Paper}>
         <Table style={{margin:"10px 0 15px 0", border: "5px double grey"}} aria-label="simple table">
-            <TableHead style={{borderBottom: "3px solid black" }}>
-                <TableRow >
-                    <TableCell>Exercise</TableCell>
-                    <TableCell>Reps</TableCell>
-                    <TableCell>Weight (kg)</TableCell>
+            <TableHead style={{borderBottom: "2px solid black", fontWeight:"700"}} variant='head'>
+                <TableRow> 
+                    <TableCell style={{ fontWeight:"700"}}>Exercise</TableCell>
+                    <TableCell style={{ fontWeight:"700"}}>Reps</TableCell>
+                    <TableCell style={{ fontWeight:"700"}}>Weight (kg)</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>

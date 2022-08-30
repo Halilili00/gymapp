@@ -1,10 +1,12 @@
+import { Card, Typography } from '@mui/material'
 import React from 'react'
 
-const Post = () => {
+const Post = ({post}) => {
   return (
-    <div>
-        <h1>Post</h1>
-    </div>
+        <Card>
+          <Typography>{post.creator}</Typography>
+          <Typography>{post.title}</Typography>
+        </Card>
   )
 }
 

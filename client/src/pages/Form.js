@@ -2,31 +2,36 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  FormGroup,
   FormLabel,
   Paper,
   Radio,
   RadioGroup,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import axios from "axios";
 import Exercise from "../components/Exercise";
+import { useDispatch } from "react-redux";
+import { createPost } from "../redux/actions/postActions";
 
 const Form = () => {
   const [exercises, setExercises] = useState({
-    exerciseNum: 0,
     exercise: "",
     reps: "",
     weight: 0,
   });
   const [post, setPost] = useState({
+    public: true,
     title: "",
     creator: "",
     description: "",
     category: "",
     exercises: [],
   });
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     let { name, type, value } = e.target;
@@ -48,13 +53,12 @@ const Form = () => {
     const newExercises = [...post.exercises];
     newExercises.push(exercises);
     setPost({ ...post, exercises: newExercises });
-    setExercises({exerciseNum: (exercises.exerciseNum+1), exercise: "", reps: "", weight: 0 });
-    console.log(exercises.exerciseNum)
+    setExercises({exercise: "", reps: "", weight: 0 });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/posts", post);
+    dispatch(createPost(post))
     alert("saved" + JSON.stringify(post));
   };
 
@@ -62,6 +66,9 @@ const Form = () => {
     <Paper>
       <form onSubmit={handleSubmit} style={{ margin: "10px"}}>
         <Typography variant="h3" style={{display:"flex", justifyContent:"center"}}>Create workout</Typography>
+        <FormGroup>
+          <FormControlLabel control={<Switch checked={post.public} onChange={() => setPost({...post, public: !post.public})}/>} label='Public' labelPlacement="start"/>
+        </FormGroup>
         <TextField
           value={post.title}
           name="title"

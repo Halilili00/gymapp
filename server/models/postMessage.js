@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
+  public: Boolean,
   title: String,
   categories: [String],
   description: String,
