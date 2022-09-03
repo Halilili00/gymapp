@@ -11,10 +11,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import FileBase from 'react-file-base64'
+
 import React, { useState } from "react";
 import Exercise from "../components/Exercise";
 import { useDispatch } from "react-redux";
 import { createPost } from "../redux/actions/postActions";
+
+
 
 const Form = () => {
   const [exercises, setExercises] = useState({
@@ -29,6 +33,7 @@ const Form = () => {
     description: "",
     category: "",
     exercises: [],
+    selectedFile: ""
   });
 
   const dispatch = useDispatch();
@@ -95,6 +100,7 @@ const Form = () => {
           rows={3}
           onChange={handleChange}
         />
+        <FileBase type="img" multiple={false} onDone={({ base64 }) => setPost({ ...post, selectedFile: base64 })}/>
         <FormControl style={{ margin: "10px 0 10px 0" }} fullWidth>
           <FormLabel>Category</FormLabel>
           <RadioGroup

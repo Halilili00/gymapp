@@ -6,6 +6,7 @@ const postSchema = mongoose.Schema({
   categories: [String],
   description: String,
   creator: String,
+  selectedFile: String,
   exercises: [{
     exercise: String,
     reps: String,

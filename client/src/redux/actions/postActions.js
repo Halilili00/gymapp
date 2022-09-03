@@ -20,3 +20,13 @@ export const createPost = (post) => async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const getPostWithId = (id) => async (dispatch) => {
+    try {
+        const {data} = await api.getPostWithId(id);
+
+        dispatch({type: actions.GET_POST_WITH_ID, payload: data})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
