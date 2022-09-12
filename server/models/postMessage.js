@@ -2,10 +2,11 @@ import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
   public: Boolean,
-  title: String,
-  categories: [String],
+  title: {type: String, required: true},
+  category: {type: String, required: true},
   description: String,
-  creator: String,
+  creator: {type: String, required: true},
+  creatorId: String,
   selectedFile: String,
   exercises: [{
     exercise: String,
@@ -16,10 +17,7 @@ const postSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
+  createdAt: Date,
 });
 
 const PostMessage = mongoose.model("PostMessage", postSchema);

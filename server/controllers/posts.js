@@ -1,4 +1,7 @@
 import PostMessage from "../models/postMessage.js"
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 export const getPosts = async (req, res) => {
     try {
@@ -12,7 +15,7 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const post = req.body;
-    const newPost = new PostMessage(post)
+    const newPost = new PostMessage({...post, creatorId: req.userId, createdAt: new Date().toISOString()})
 
     try {
         await newPost.save();
@@ -32,4 +35,21 @@ export const getPostWithId = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
+
+export const deletePost = async (req, res) => {
+    const {id} = req.params;
+    
+    await PostMessage.findByIdAndRemove(id);
+
+    res.json({message: "Post deleted succesfully!"});
+}
+
+export const updatePost = async (req, res) => {
+    const {id} = req.params;
+    const post = req.body;
+    
+    await PostMessage.findByIdAndUpdate(id,post);
+
+    res.json({message: "Post updated succesfully!"});
 }
