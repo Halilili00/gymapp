@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import Form from './pages/Form'
 import Exercises from './components/Exercises'
 import Auth from './components/Auth'
+import MyAccount from './pages/MyAccount'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/form' element={<Form/>}/>
         <Route path='/form/:id' element={<Form/>}/>
         <Route path='/login' element={<Auth/>}/>
+        <Route path='/MyAccount/:name' element={<MyAccount/>}/>
       </Routes>
       <Footer/>
     </Box>

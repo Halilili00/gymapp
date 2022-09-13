@@ -56,7 +56,7 @@ const PostCard = ({ post }) => {
               <ThumbUpIcon fontSize="small" />
               Like {post.likeCount}
             </Button>
-            {user?.result?._id === post?.creatorId && (
+            {(user && user?.result?._id === post?.creatorId) && (
               <Button onClick={() => dispatch(deletePost(post._id))}>
                 <DeleteIcon fontSize="small" />
                 Delete

@@ -160,7 +160,8 @@ const Form = () => {
             >
               <FormControlLabel
                 value="Full body"
-                control={<Radio />}
+                required
+                control={<Radio required/>}
                 label="Full body"
               />
               <FormControlLabel
