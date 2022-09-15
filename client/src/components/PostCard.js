@@ -10,16 +10,20 @@ import {
   Typography,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deletePost, getPostWithId } from "../redux/actions/postActions";
+import { deletePost, getPostWithId, likePost } from "../redux/actions/postActions";
+import Like from "./toolbox/Like";
 
 const PostCard = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
+
+  const likeing = (postId) => {
+    dispatch(likePost(postId))
+  }
 
   return (
         <Card>
@@ -52,10 +56,7 @@ const PostCard = ({ post }) => {
           <CardActions
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Button>
-              <ThumbUpIcon fontSize="small" />
-              Like {post.likeCount}
-            </Button>
+            <Like post={post} user={user?.result} likeing={() => likeing(post._id)}/>
             {(user && user?.result?._id === post?.creatorId) && (
               <Button onClick={() => dispatch(deletePost(post._id))}>
                 <DeleteIcon fontSize="small" />

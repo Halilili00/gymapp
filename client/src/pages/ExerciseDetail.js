@@ -20,7 +20,7 @@ const ExerciseDetail = () => {
 
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px", marginTop: "10px"}} elevation={6}>
-      {user?.result?._id === post?.creatorId && (
+      {(user && user?.result?._id === post?.creatorId) && (
               <div>
               <Button variant="contained" onClick={() => navigate(`/form/${post._id}`)}>Update</Button>
               <Button variant="contained" onClick={() => remove(post._id)}>Delete</Button>

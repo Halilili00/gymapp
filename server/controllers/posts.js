@@ -53,3 +53,21 @@ export const updatePost = async (req, res) => {
 
     res.json({message: "Post updated succesfully!"});
 }
+
+export const likePost = async (req, res) => {
+    const {id} = req.params;
+
+    if(!req.userId){
+        return res.json({message: "Unautohticated"})
+    }
+    
+    const post = await PostMessage.findById(id);
+
+    const index = post.likeCount.findIndex((id) => id === String(req.userId));
+    if(index === -1) {
+        post.likeCount.push(req.userId);
+    } else {
+        post.likeCount = post.likeCount.filter((id) => id !== String(req.userId))
+    }
+    const updatePost = await PostMessage.findByIdAndUpdate(id, post)
+}

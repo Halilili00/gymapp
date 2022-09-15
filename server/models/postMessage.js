@@ -14,8 +14,8 @@ const postSchema = mongoose.Schema({
     weight: Number
   }],
   likeCount: {
-    type: Number,
-    default: 0,
+    type: [String],
+    default: [],
   },
   createdAt: Date,
 });
