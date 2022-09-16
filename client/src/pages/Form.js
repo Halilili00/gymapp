@@ -14,7 +14,7 @@ import {
 import FileBase from "react-file-base64";
 
 import React, { useEffect, useState } from "react";
-import Exercise from "../components/toolbox/Exercise";
+import ExerciseTable from "../components/toolbox/ExerciseTable";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../redux/actions/postActions";
 import { useParams } from "react-router-dom";
@@ -176,7 +176,7 @@ const Form = () => {
           </FormControl>
           <Paper style={{ border: "5px double red", margin: "5px 0 10px 0" }}>
             {post?.exercises.length > 0 ? (
-              <Exercise exercises={post.exercises} />
+              <ExerciseTable exercises={post.exercises} />
             ) : null}
             <TextField
               value={exercises.exercise}

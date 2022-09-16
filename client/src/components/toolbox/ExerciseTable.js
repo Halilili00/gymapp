@@ -1,7 +1,7 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React from 'react'
 
-const Exercise = ({exercises}) => {
+const ExerciseTable = ({exercises}) => {
   return (
     <TableContainer component={Paper}>
         <Table style={{margin:"10px 0 15px 0", border: "5px double grey"}} aria-label="simple table">
@@ -26,4 +26,4 @@ const Exercise = ({exercises}) => {
   )
 }
 
-export default Exercise
+export default ExerciseTable

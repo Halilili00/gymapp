@@ -15,7 +15,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, getPostWithId, likePost } from "../redux/actions/postActions";
-import Like from "./toolbox/Like";
+import LikeButton from "./toolbox/LikeButton";
 
 const PostCard = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -56,7 +56,7 @@ const PostCard = ({ post }) => {
           <CardActions
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Like post={post} user={user?.result} likeing={() => likeing(post._id)}/>
+            <LikeButton post={post} user={user?.result} likeing={() => likeing(post._id)}/>
             {(user && user?.result?._id === post?.creatorId) && (
               <Button onClick={() => dispatch(deletePost(post._id))}>
                 <DeleteIcon fontSize="small" />

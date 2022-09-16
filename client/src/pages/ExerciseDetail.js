@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, Paper, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import Exercise from "../components/toolbox/Exercise";
+import ExerciseTable from "../components/toolbox/ExerciseTable";
 import moment from 'moment';
 import { deletePost } from "../redux/actions/postActions";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ const ExerciseDetail = () => {
         <div style={{ borderRadius: "20px", margin: "10px", flex: 1, minWidth: "50%"}}>
           <Typography variant="h3">{post.title}</Typography>
           <Typography variant="body1">{post.description}</Typography>
-          {post.exercises?.length>0 ? <Exercise exercises={post.exercises}/> : null}
+          {post.exercises?.length>0 ? <ExerciseTable exercises={post.exercises}/> : null}
           <Typography variant="h6">Created by: {post.creator}</Typography>
           <Typography variant="body1">{moment(post.createdAt).format("LLL")}</Typography>
         </div>

@@ -69,5 +69,6 @@ export const likePost = async (req, res) => {
     } else {
         post.likeCount = post.likeCount.filter((id) => id !== String(req.userId))
     }
-    const updatePost = await PostMessage.findByIdAndUpdate(id, post)
+    const updatePost = await PostMessage.findByIdAndUpdate(id, post, {new: true})
+    res.status(200).json(updatePost);
 }

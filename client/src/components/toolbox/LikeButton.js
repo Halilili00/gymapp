@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
-const Like = ({ post, user, likeing }) => {
+const LikeButton = ({ post, user, likeing }) => {
   return (
     <div>
       {user ? (
@@ -21,4 +21,4 @@ const Like = ({ post, user, likeing }) => {
   );
 };
 
-export default Like;
+export default LikeButton;
