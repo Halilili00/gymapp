@@ -14,8 +14,12 @@ app.use(cors());
 app.use('/posts', postRoutes)
 app.use('/user', userRoutes)
 
+app.get("/", (req, res) => {
+    res.send("This serves is working!")
+})
+
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.CONNECTION_URL)
+mongoose.connect(process.env.CONNECTION_URL,{ useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`)))
 .catch((error) => console.group(error.message))

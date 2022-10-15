@@ -7,18 +7,32 @@ import { getPosts } from "../redux/actions/postActions";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const location = useLocation();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch, location])
+  }, [dispatch, location]);
 
   return (
     <Box>
-      <Exercises/>
+      <Exercises />
       {user && (
-        <Button sx={{right: {xl:"5%", lg:10, xs: 7}, bottom: { sm: 80, xs: 20}}} style={{position: "fixed", color: "red" , fontSize: 25, backgroundColor: "black"}} href="/form">Add new post</Button>
+        <Button
+          sx={{
+            right: { xl: "5%", lg: 10, xs: 7 },
+            bottom: { sm: 80, xs: 20 },
+          }}
+          style={{
+            position: "fixed",
+            color: "red",
+            fontSize: 25,
+            backgroundColor: "black",
+          }}
+          href="/form"
+        >
+          Add new post
+        </Button>
       )}
     </Box>
   );

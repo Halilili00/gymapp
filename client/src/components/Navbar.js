@@ -15,6 +15,7 @@ import decode from "jwt-decode";
 import Logo from "../assets/images/logo.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -62,7 +63,7 @@ const Navbar = () => {
               alignItems: "center",
               width: "80px",
               height: "50px",
-              margin: "0 20px",
+              margin: "0 5px",
             }}
           />
         </Link>
@@ -71,15 +72,15 @@ const Navbar = () => {
           to="/"
           variant="h4"
           style={{ textDecoration: "none", color: "white" }}
-          sx={{ flexGrow: 1 , fontSize: {sm: "2.3rem", xs : "1rem"}}}
+          sx={{ flexGrow: 1, marginLeft: {sm: "25px", xs: "7px"}}}
         >
           Fitness Blog
         </Typography>
         {user ? (
+          <>
           <Box
-            sx={{ flexGrow: 0 }}
+            sx={{ flexGrow: 0, display: {xs: "none", sm:"flex" } }}
             style={{
-              display: "flex",
               padding: "5px",
               justifyContent: "space-between",
             }}
@@ -118,10 +119,40 @@ const Navbar = () => {
               <MenuItem onClick={logouting}>Logout</MenuItem>
             </Menu>
           </Box>
+          <Box sx={{ flexGrow: 0, display: {xs: "flex", sm:"none" } }}
+            style={{
+              padding: "5px",
+              justifyContent: "space-between",
+            }}>
+              <MenuOutlinedIcon onClick={handleMenu} sx={{ display: {xs: "flex", sm: "none"} }}/>
+          </Box>
+          </>
         ) : (
-          <Button color="inherit" component={Link} to="/login">
+          <>
+          <Button color="inherit" component={Link} to="/login" sx={{display: {xs: "none", sm:"flex" } }}>
             Sing in/Sing up
           </Button>
+          <MenuOutlinedIcon onClick={handleMenu} sx={{ display: {xs: "flex", sm: "none"} }}/>
+          <Menu
+          sx={{ mt: "45px", display: {xs: "flex", sm: "none"} }}
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem component={Link} to="/login">Sing in</MenuItem>
+          <MenuItem component={Link} to="/login">Sing up</MenuItem>
+        </Menu>
+          </>
         )}
       </Toolbar>
     </AppBar>

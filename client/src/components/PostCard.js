@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Avatar,
   Button,
   Card,
   CardActions,
@@ -28,6 +29,9 @@ const PostCard = ({ post }) => {
   return (
         <Card>
           <CardHeader
+            avatar={
+              <Avatar>{post.creator.charAt(0)}</Avatar>
+            }
             title={post.creator}
             subheader={moment(post.createdAt).fromNow()}
             action={

@@ -6,7 +6,6 @@ import './App.css'
 import Home from './pages/Home'
 import ExerciseDetail from './pages/ExerciseDetail'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
 import Form from './pages/Form'
 import Exercises from './components/Exercises'
 import Auth from './components/Auth'
@@ -25,7 +24,6 @@ const App = () => {
         <Route path='/login' element={<Auth/>}/>
         <Route path='/MyAccount/:name' element={<MyAccount/>}/>
       </Routes>
-      <Footer/>
     </Box>
   )
 }
