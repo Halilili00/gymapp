@@ -15,7 +15,7 @@ const LikeButton = ({ post, user, likeing }) => {
           )}
         </Button>
       ) : (
-        <Button>{post.likeCount.length} {post.likeCount.length <= 1 ? 'Like' : 'Likes'}</Button>
+        <Button disabled><ThumbUpAltIcon fontSize="small" /> {post.likeCount.length} {post.likeCount.length <= 1 ? 'Like' : 'Likes'}</Button>
       )}
     </div>
   );

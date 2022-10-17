@@ -6,10 +6,21 @@ dotenv.config();
 export const getPosts = async (req, res) => {
     try {
         const postMessages =  await PostMessage.find();
-
-        res.status(200).json(postMessages);
+        res.status(200).json(postMessages.filter(posts => posts.public));
     } catch (error) {
         res.status(404).json({message: error.messages})
+    }
+}
+
+export const getUserPosts = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const post = await PostMessage.find({ creatorId: {$eq: id }});
+        
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
     }
 }
 

@@ -11,7 +11,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Input from "./toolbox/Input";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signIn, signUp } from "../redux/actions/auth";
+import { signIn, signUp, googleAuth } from "../redux/actions/auth";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -49,6 +50,11 @@ const Auth = () => {
     setIsSignup(!isSignup);
     setShowPassword(false);
   };
+
+  const onError = () => {
+    console.log("error");
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Paper
@@ -111,10 +117,16 @@ const Auth = () => {
             fullWidth
             variant="contained"
             color="primary"
-            style={{ marginTop: "10px" }}
+            style={{ marginTop: "10px", marginBottom: "10px" }}
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
+          <GoogleLogin
+          onSuccess={(res) => dispatch(googleAuth(res, navigate))}
+          onError ={onError}
+          theme="filled_blue"
+          width="300px"
+          />
           <Grid container justify="flex-end">
             <Grid item>
               <Button onClick={switchMode}>

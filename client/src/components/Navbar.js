@@ -16,6 +16,7 @@ import Logo from "../assets/images/logo.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { googleLogout } from "@react-oauth/google";
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -27,6 +28,7 @@ const Navbar = () => {
   const logouting = () => {
     handleClose();
     dispatch(logout());
+    googleLogout();
     setUser(null);
     navigate("/");
   };
@@ -90,7 +92,7 @@ const Navbar = () => {
                 alt={user.result.name}
                 src={user.result.imageUrl}
               >
-                {user?.result.name.charAt(0)}
+                {user?.result.name?.charAt(0)}
               </Avatar>
               <Typography
                 variant="h6"

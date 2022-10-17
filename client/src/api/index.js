@@ -11,6 +11,7 @@ API.interceptors.request.use((req) => {
   });
 
 export const getPosts = () => API.get('/posts');
+export const getUserPostWithId = (id) => API.get(`/posts/${id}/userProfile`);
 export const createPost = (newPost) => API.post('/posts', newPost);
 export const getPostWithId = (id) => API.get(`/posts/${id}`);
 export const deletePost = (id) => API.delete(`/posts/${id}`);
