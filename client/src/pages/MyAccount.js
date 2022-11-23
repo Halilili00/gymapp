@@ -1,4 +1,4 @@
-import { Avatar, Grid, Paper, Typography } from "@mui/material";
+import { Avatar, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Exercises from "../components/Exercises";

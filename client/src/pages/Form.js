@@ -202,7 +202,7 @@ const Form = () => {
               label="Weight (kg)"
               onChange={handleChange}
             />
-            <Button variant="contained" fullWidth onClick={handleExercise}>
+            <Button variant="contained" fullWidth onClick={handleExercise} style={{marginTop: "10px"}}>
               Add exercise
             </Button>
           </Paper>

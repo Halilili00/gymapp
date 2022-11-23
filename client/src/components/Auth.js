@@ -34,7 +34,7 @@ const Auth = () => {
     } else {
       dispatch(signIn(signData, navigate));
     }
-    console.log(signData);
+    //console.log(signData);
   };
 
   const handleChange = (event) => {
@@ -95,6 +95,7 @@ const Auth = () => {
               label="Email Address"
               handleChange={handleChange}
               type="email"
+              autoFocus
             />
             <Input
               name="password"

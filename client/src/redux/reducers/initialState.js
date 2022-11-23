@@ -1,7 +1,7 @@
 const states = {
     posts:[],
     post: {},
-    authData: null
+    authData: null,
 }
 
 export default states;

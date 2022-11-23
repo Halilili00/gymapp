@@ -11,4 +11,4 @@ This is blog web application. Where people can share posts with other users and 
 - jsonwebtoken
 # Deployment
 Live dome: https://fitnessblogapp.netlify.app/
-![image](https://user-images.githubusercontent.com/83812666/195983712-99c8f192-3708-41df-824e-c38eff2beb49.png)
+![image](image.png)

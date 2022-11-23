@@ -1,38 +1,32 @@
-import { Box, Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Box, Fab } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Exercises from "../components/Exercises";
-import { getPosts } from "../redux/actions/postActions";
+import { getAllPosts, getPosts } from "../redux/actions/postActions";
 
 const Home = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const location = useLocation();
+  const [sort, setSort] = useState("no")
 
   useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch, location]);
+    if(user){
+      dispatch(getAllPosts(user.result._id,sort))
+    } else {
+      dispatch(getPosts(sort));
+    }
+  }, [dispatch, location, sort]);
 
   return (
     <Box>
-      <Exercises />
+      <Exercises sort={sort} setSort={setSort}/>
       {user && (
-        <Button
-          sx={{
-            right: { xl: "5%", lg: 10, xs: 7 },
-            bottom: { sm: 80, xs: 20 },
-          }}
-          style={{
-            position: "fixed",
-            color: "red",
-            fontSize: 25,
-            backgroundColor: "black",
-          }}
-          href="/form"
-        >
-          Add new post
-        </Button>
+        <Fab variant="extended" style={{position: "sticky", bottom: 50, left: 1450, fontSize: 20}} href="/form">
+          <AddIcon fontSize="90px"/> Add new post
+        </Fab>
       )}
     </Box>
   );

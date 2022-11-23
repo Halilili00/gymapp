@@ -1,9 +1,9 @@
 import * as actions from "./actionsType.js"
 import * as api from "../../api/index.js";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (sort) => async (dispatch) => {
     try {
-        const {data} = await api.getPosts();
+        const {data} = await api.getPosts(sort);
 
         dispatch({type: actions.GET_POSTS, payload: data});
     } catch (error) {
@@ -16,6 +16,16 @@ export const getUserPostWithId = (id) => async (dispatch) => {
         const {data} = await api.getUserPostWithId(id);
 
         dispatch({type: actions.GET_USER_POSTS, payload: data})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getAllPosts = (id,sort) => async (dispatch) => {
+    try {
+        const {data} = await api.getAllPosts(id,sort);
+
+        dispatch({type: actions.GET_ALL_POSTS, payload: data})
     } catch (error) {
         console.log(error.message)
     }

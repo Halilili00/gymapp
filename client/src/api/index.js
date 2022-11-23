@@ -10,10 +10,11 @@ API.interceptors.request.use((req) => {
     return req;
   });
 
-export const getPosts = () => API.get('/posts');
+export const getPosts = (sort) => API.get(`/posts/${sort}`);
 export const getUserPostWithId = (id) => API.get(`/posts/${id}/userProfile`);
+export const getAllPosts = (id,sort) => API.get(`/posts/${id}/${sort}/allPosts`);
 export const createPost = (newPost) => API.post('/posts', newPost);
-export const getPostWithId = (id) => API.get(`/posts/${id}`);
+export const getPostWithId = (id) => API.get(`/posts/${id}/post`);
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost)
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);

@@ -30,7 +30,7 @@ const PostCard = ({ post }) => {
         <Card>
           <CardHeader
             avatar={
-              <Avatar>{post.creator.charAt(0)}</Avatar>
+              <Avatar src={user?.result._id === post.creatorId ? user?.result.imageUrl : null}>{post.creator.charAt(0)}</Avatar>
             }
             title={post.creator}
             subheader={moment(post.createdAt).fromNow()}
