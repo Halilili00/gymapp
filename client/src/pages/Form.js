@@ -18,6 +18,7 @@ import ExerciseTable from "../components/toolbox/ExerciseTable";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../redux/actions/postActions";
 import { useParams } from "react-router-dom";
+import Alert from "../components/toolbox/Alert";
 
 const Form = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -221,7 +222,7 @@ const Form = () => {
     );
   };
 
-  return <div>{user ? renderForm() : renderLogin()}</div>;
+  return <div>{user ? renderForm() : <Alert message={"Please Sign In to create new post"}/>}</div>;
 };
 
 export default Form;

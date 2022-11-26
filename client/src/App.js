@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Box } from "@mui/material";
 
@@ -21,10 +21,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/exercises" element={<Exercises />} />
           <Route path="/exerciseDetail/:title" element={<ExerciseDetail />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/form" element={<Form />}/>
           <Route path="/form/:id" element={<Form />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/MyAccount/:name" element={<MyAccount />} />
+          <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
       </Box>
     </GoogleOAuthProvider>

@@ -29,10 +29,12 @@ export const signin = async(req, res) => {
 
 export const signup = async(req, res) => {
     const { email, password, confirmPassword, firstName, lastName } = req.body;
+    const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})')
 
     try {
         const existingUser = await User.findOne({email})
 
+        if(strongPassword.test(password)) return res.status(400).json({message: "Password need to be 8 characters and have one uppercase letter, one lowercase letter, one digit!"})
         if(existingUser) return res.status(404).json({message: "User already exist"})
         
         if(password !== confirmPassword) return res.status(400).json({message: "Password not match!"})

@@ -10,10 +10,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const location = useLocation();
-  const [sort, setSort] = useState("no")
+  const [sort, setSort] = useState("likedec")
 
   useEffect(() => {
-    if(user){
+    if(user?.token){
       dispatch(getAllPosts(user.result._id,sort))
     } else {
       dispatch(getPosts(sort));
@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <Box>
       <Exercises sort={sort} setSort={setSort}/>
-      {user && (
+      {user?.result && (
         <Fab variant="extended" style={{position: "sticky", bottom: 50, left: 1450, fontSize: 20}} href="/form">
           <AddIcon fontSize="90px"/> Add new post
         </Fab>

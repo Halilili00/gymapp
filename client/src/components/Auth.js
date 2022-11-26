@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Avatar,
   Button,
+  CircularProgress,
   Container,
   Grid,
   Paper,
@@ -9,7 +11,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Input from "./toolbox/Input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp, googleAuth } from "../redux/actions/auth";
 import { GoogleLogin } from "@react-oauth/google";
@@ -26,6 +28,8 @@ const Auth = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoading = useSelector((state) => state.generalReducer.isLoading);
+  const error = useSelector((state) => state.authReducer.errors);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -113,6 +117,9 @@ const Auth = () => {
               />
             )}
           </Grid>
+          {error && <Alert severity="error">{error.response.data.message}</Alert>}
+          {isLoading ?
+          <Button style={{ marginTop: "10px", marginBottom: "10px" }} fullWidth variant="contained" color="primary" disabled>{isSignup ? <>Sign Up <CircularProgress size="1.5rem" style={{marginLeft: 10}}/></> : <>Sign In <CircularProgress size="1.5rem" style={{marginLeft: 10}}/></>}</Button>: 
           <Button
             type="submit"
             fullWidth
@@ -121,14 +128,14 @@ const Auth = () => {
             style={{ marginTop: "10px", marginBottom: "10px" }}
           >
             {isSignup ? "Sign Up" : "Sign In"}
-          </Button>
+          </Button>}
           <GoogleLogin
           onSuccess={(res) => dispatch(googleAuth(res, navigate))}
           onError ={onError}
           theme="filled_blue"
           width="300px"
           />
-          <Grid container justify="flex-end">
+          <Grid container justify="flex-end" mt={2}>
             <Grid item>
               <Button onClick={switchMode}>
                 {isSignup

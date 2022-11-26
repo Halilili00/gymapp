@@ -4,13 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const getPosts = async (req, res) => {
-  const { sort } = req.params;
+  const { sort } = req.query;
   try {
     let postMessages;
     switch (sort) {
-      case "no":
-        postMessages = await PostMessage.find({public: true});
-        break;
       case "datenew":
         postMessages = await PostMessage.find({public: true}).sort({ createdAt: -1 });
         break;
@@ -24,6 +21,7 @@ export const getPosts = async (req, res) => {
         postMessages = await PostMessage.aggregate([{ $addFields: {likeCount_count: {$size: {"$ifNull": ["$likeCount", []]}}}}, {$match: {public: true}} , {$sort: {"likeCount_count": -1}}])
         break;
       default:
+        postMessages = await PostMessage.find({public: true});
         break;
     }
     res.status(200).json(postMessages);
@@ -34,14 +32,12 @@ export const getPosts = async (req, res) => {
 
 //haetaan posts jotka ovat public ja käyttäjän lisämät private postitkin
 export const getAllPosts = async (req, res) => {
-  const { id, sort} = req.params
+  const { id } = req.params
+  const { sort } = req.query
 
   try {
     let postMessages
     switch (sort) {
-      case "no":
-        postMessages = await PostMessage.find({$or: [{ public: true }, { creatorId: id }]});
-        break;
       case "datenew":
         postMessages = await PostMessage.find({$or: [{ public: true }, { creatorId: id }]}).sort({ createdAt: -1 });
         break;
@@ -55,6 +51,7 @@ export const getAllPosts = async (req, res) => {
         postMessages = await PostMessage.aggregate([{ $addFields: {likeCount_count: {$size: {"$ifNull": ["$likeCount", []]}}}}, {$match: {$or: [{ public: true }, { creatorId: id }]}} , {$sort: {"likeCount_count": -1}}])
         break;
       default:
+        postMessages = await PostMessage.find({$or: [{ public: true }, { creatorId: id }]});
         break;
     }
     res.status(200).json(postMessages);

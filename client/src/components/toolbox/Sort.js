@@ -7,7 +7,6 @@ const Sort = ({sort, setSort}) => {
       style={{
         backgroundColor: "whitesmoke",
         borderRadius: "20px",
-        marginTop: "10px",
       }}
     >
       <InputLabel></InputLabel>
@@ -16,7 +15,6 @@ const Sort = ({sort, setSort}) => {
         label="sort"
         onChange={(e) => setSort(e.target.value)}
       >
-        <MenuItem value="no">None</MenuItem>
         <MenuItem value="datenew">Date newest</MenuItem>
         <MenuItem value="dateold">Date oldest</MenuItem>
         <MenuItem value="likeinc">Like increase</MenuItem>

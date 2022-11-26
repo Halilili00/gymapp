@@ -4,12 +4,15 @@ import jwt_decode from "jwt-decode";
 
 export const signIn = (signData, navigate) => async(dispatch) => {
     try {
+        dispatch({ type: actions.STARTLOADING})
         const {data} = await api.signIn(signData);
         dispatch({type: actions.AUTH, data})
-        
+        dispatch({ type: actions.ENDLOADING})
         navigate("/")
     } catch (error) {
         console.log(error)
+        dispatch({ type: actions.AUTH, error})
+        dispatch({ type: actions.ENDLOADING})
     }
 }
 
@@ -20,17 +23,21 @@ export const googleAuth = (res, navigate) => async(dispatch) => {
         navigate("/");
     } catch (error) {
         console.log(error)
+        dispatch({ type: actions.AUTH, error})
     }
 }
 
 export const signUp = (signData, navigate) => async(dispatch) => {
     try {
+        dispatch({ type: actions.STARTLOADING})
         const {data} = await api.signUp(signData);
         dispatch({type: actions.AUTH, data})
-
+        dispatch({ type: actions.ENDLOADING})
         navigate("/")
     } catch (error) {
         console.log(error)
+        dispatch({ type: actions.AUTH, error})
+        dispatch({ type: actions.ENDLOADING})
     }
 }
 

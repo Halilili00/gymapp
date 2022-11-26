@@ -78,7 +78,7 @@ const Navbar = () => {
         >
           Fitness Blog
         </Typography>
-        {user ? (
+        {user?.result ? (
           <>
           <Box
             sx={{ flexGrow: 0, display: {xs: "none", sm:"flex" } }}

@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const API = axios.create({baseURL: 'https://fitnessblog-server.herokuapp.com'})
+const API = axios.create({baseURL: 'https://fitnessblog-server.onrender.com'})
+//const API = axios.create({baseURL: 'http://localhost:5000'})
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
@@ -10,9 +11,9 @@ API.interceptors.request.use((req) => {
     return req;
   });
 
-export const getPosts = (sort) => API.get(`/posts/${sort}`);
+export const getPosts = (sort) => API.get(`/posts?sort=${sort}`);
 export const getUserPostWithId = (id) => API.get(`/posts/${id}/userProfile`);
-export const getAllPosts = (id,sort) => API.get(`/posts/${id}/${sort}/allPosts`);
+export const getAllPosts = (id,sort) => API.get(`/posts/${id}/allPosts?sort=${sort}`);
 export const createPost = (newPost) => API.post('/posts', newPost);
 export const getPostWithId = (id) => API.get(`/posts/${id}/post`);
 export const deletePost = (id) => API.delete(`/posts/${id}`);

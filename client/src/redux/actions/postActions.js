@@ -3,31 +3,37 @@ import * as api from "../../api/index.js";
 
 export const getPosts = (sort) => async (dispatch) => {
     try {
+        dispatch({ type: actions.STARTLOADING})
         const {data} = await api.getPosts(sort);
-
         dispatch({type: actions.GET_POSTS, payload: data});
+        dispatch({ type: actions.ENDLOADING})
     } catch (error) {
         console.log(error.message)
+        dispatch({ type: actions.ENDLOADING})
     }
 }
 
 export const getUserPostWithId = (id) => async (dispatch) => {
     try {
+        dispatch({ type: actions.STARTLOADING})
         const {data} = await api.getUserPostWithId(id);
-
         dispatch({type: actions.GET_USER_POSTS, payload: data})
+        dispatch({ type: actions.ENDLOADING})
     } catch (error) {
         console.log(error.message)
+        dispatch({ type: actions.ENDLOADING})
     }
 }
 
 export const getAllPosts = (id,sort) => async (dispatch) => {
     try {
+        dispatch({ type: actions.STARTLOADING})
         const {data} = await api.getAllPosts(id,sort);
-
         dispatch({type: actions.GET_ALL_POSTS, payload: data})
+        dispatch({ type: actions.ENDLOADING})
     } catch (error) {
         console.log(error.message)
+        dispatch({ type: actions.ENDLOADING})
     }
 }
 
