@@ -12,8 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import FileBase from "react-file-base64";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ExerciseTable from "../components/toolbox/ExerciseTable";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../redux/actions/postActions";
@@ -39,6 +38,7 @@ const Form = () => {
     selectedFile: "",
   });
   const dispatch = useDispatch();
+  const inputRef = useRef();
 
   const handleChange = (e) => {
     let { name, type, value } = e.target;
@@ -94,7 +94,11 @@ const Form = () => {
     }
   };
 
-  const renderLogin = () => {
+  useEffect(() => {
+    inputRef.current.focus();
+  },[])
+
+  /*const renderLogin = () => {
     return (
       <Paper style={{ padding: "50px", marginTop: "20px" }}>
         <Typography variant="h3" align="center">
@@ -102,7 +106,7 @@ const Form = () => {
         </Typography>
       </Paper>
     );
-  };
+  };*/
 
   const renderForm = () => {
     return (
@@ -135,6 +139,7 @@ const Form = () => {
             label="Title"
             onChange={handleChange}
             required
+            inputRef={inputRef}
           />
           <TextField
             value={post.description}

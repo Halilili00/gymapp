@@ -28,10 +28,9 @@ const Exercises = ({ sort, setSort }) => {
     }
   })
 
-  console.log(findPosts)
   return (
     <Grid container>
-      {findPosts.length>0 && <Grid item xs={12} mb={1}>
+      {(findPosts.length > 0 || posts.length > 0) && <Grid item xs={12} mb={1}>
         <TextField
           style={{ backgroundColor: "whitesmoke", borderRadius: "20px", margin: "15px 0px 0px 0px" }}
           type="search"
@@ -62,11 +61,14 @@ const Exercises = ({ sort, setSort }) => {
             <Grid item key={index} xs={12} sm={4}>
               <div>Loading..</div><Loading />
             </Grid>
-          ) : findPosts.length ? findPosts.map(post =>
-            <Grid item key={post._id} xs={12} sm={4}>
-              {post ? <PostCard post={post} /> : <><div>Loading..</div><Loading /></>}
-            </Grid>) :
+          ) : (findPosts.length || posts.length) ? !findPosts.length ?
             <Grid item sx={{ width: '100%', marginBottom: 5 }}>
+              <Alert message={"Nothing found!"} />
+            </Grid> : findPosts.map(post =>
+              <Grid item key={post._id} xs={12} sm={4}>
+                {post ? <PostCard post={post} /> : <><div>Loading..</div><Loading /></>}
+              </Grid>)
+            : <Grid item sx={{ width: '100%', marginBottom: 5 }}>
               <Alert message={"You don't have post!"} />
             </Grid>
           }
