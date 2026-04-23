@@ -10,7 +10,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 import Logo from "../assets/images/logo.png";
 import { useDispatch } from "react-redux";
@@ -37,7 +37,7 @@ const Navbar = () => {
     const token = user?.token;
 
     if (token) {
-      const decodedToken = decode(token);
+      const decodedToken = jwtDecode(token);
 
       if (decodedToken.exp * 1000 < new Date().getTime()) logouting();
     }

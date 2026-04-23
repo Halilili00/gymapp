@@ -1,6 +1,6 @@
 import * as actions from "./actionsType.js"
 import * as api from "../../api/index.js";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export const signIn = (signData, navigate) => async(dispatch) => {
     try {
@@ -10,7 +10,7 @@ export const signIn = (signData, navigate) => async(dispatch) => {
         dispatch({ type: actions.ENDLOADING})
         navigate("/")
     } catch (error) {
-        console.log(error)
+        console.error(error)
         dispatch({ type: actions.AUTH, error})
         dispatch({ type: actions.ENDLOADING})
     }
@@ -18,11 +18,11 @@ export const signIn = (signData, navigate) => async(dispatch) => {
 
 export const googleAuth = (res, navigate) => async(dispatch) => {
     try {
-        const decoded = jwt_decode(res.credential);
+        const decoded = jwtDecode(res.credential);
         dispatch({type: actions.AUTH, data: {result: {name: decoded.given_name+ " " + decoded.family_name , email: decoded.email, _id: decoded.sub, imageUrl: decoded.picture}, token: res.credential}})
         navigate("/");
     } catch (error) {
-        console.log(error)
+        console.error(error)
         dispatch({ type: actions.AUTH, error})
     }
 }
@@ -35,7 +35,7 @@ export const signUp = (signData, navigate) => async(dispatch) => {
         dispatch({ type: actions.ENDLOADING})
         navigate("/")
     } catch (error) {
-        console.log(error)
+        console.error(error)
         dispatch({ type: actions.AUTH, error})
         dispatch({ type: actions.ENDLOADING})
     }

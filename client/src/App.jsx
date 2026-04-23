@@ -14,7 +14,7 @@ import MyAccount from "./pages/MyAccount";
 
 const App = () => {
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_API_TOKEN}>
       <Box width="400px" sx={{ width: { xl: "1400px" } }} m="auto">
         <Navbar />
         <Routes>

@@ -38,7 +38,6 @@ const Auth = () => {
     } else {
       dispatch(signIn(signData, navigate));
     }
-    //console.log(signData);
   };
 
   const handleChange = (event) => {
@@ -119,21 +118,20 @@ const Auth = () => {
           </Grid>
           {error && <Alert severity="error">{error.response.data.message}</Alert>}
           {isLoading ?
-          <Button style={{ marginTop: "10px", marginBottom: "10px" }} fullWidth variant="contained" color="primary" disabled>{isSignup ? <>Sign Up <CircularProgress size="1.5rem" style={{marginLeft: 10}}/></> : <>Sign In <CircularProgress size="1.5rem" style={{marginLeft: 10}}/></>}</Button>: 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: "10px", marginBottom: "10px" }}
-          >
-            {isSignup ? "Sign Up" : "Sign In"}
-          </Button>}
+            <Button style={{ marginTop: "10px", marginBottom: "10px" }} fullWidth variant="contained" color="primary" disabled>{isSignup ? <>Sign Up <CircularProgress size="1.5rem" style={{ marginLeft: 10 }} /></> : <>Sign In <CircularProgress size="1.5rem" style={{ marginLeft: 10 }} /></>}</Button> :
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "10px", marginBottom: "10px" }}
+            >
+              {isSignup ? "Sign Up" : "Sign In"}
+            </Button>}
           <GoogleLogin
-          onSuccess={(res) => dispatch(googleAuth(res, navigate))}
-          onError ={onError}
-          theme="filled_blue"
-          width="300px"
+            onSuccess={(res) => dispatch(googleAuth(res, navigate))}
+            onError={onError}
+            ux_mode="popup"
           />
           <Grid container justify="flex-end" mt={2}>
             <Grid item>

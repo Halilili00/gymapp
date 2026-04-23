@@ -103,7 +103,7 @@ export const getPostWithId = async (req, res) => {
 export const deletePost = async (req, res) => {
   const { id } = req.params;
 
-  await PostMessage.findByIdAndRemove(id);
+  await PostMessage.findByIdAndDelete(id);
 
   res.json({ message: "Post deleted succesfully!" });
 };
@@ -133,7 +133,7 @@ export const likePost = async (req, res) => {
     post.likeCount = post.likeCount.filter((id) => id !== String(req.userId));
   }
   const updatePost = await PostMessage.findByIdAndUpdate(id, post, {
-    new: true,
+    returnDocument: 'after',
   });
   res.status(200).json(updatePost);
 };

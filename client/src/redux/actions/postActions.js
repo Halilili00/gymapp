@@ -8,7 +8,7 @@ export const getPosts = (sort) => async (dispatch) => {
         dispatch({type: actions.GET_POSTS, payload: data});
         dispatch({ type: actions.ENDLOADING})
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         dispatch({ type: actions.ENDLOADING})
     }
 }
@@ -20,7 +20,7 @@ export const getUserPostWithId = (id) => async (dispatch) => {
         dispatch({type: actions.GET_USER_POSTS, payload: data})
         dispatch({ type: actions.ENDLOADING})
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         dispatch({ type: actions.ENDLOADING})
     }
 }
@@ -32,7 +32,7 @@ export const getAllPosts = (id,sort) => async (dispatch) => {
         dispatch({type: actions.GET_ALL_POSTS, payload: data})
         dispatch({ type: actions.ENDLOADING})
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
         dispatch({ type: actions.ENDLOADING})
     }
 }
@@ -43,7 +43,7 @@ export const createPost = (post) => async (dispatch) => {
 
         dispatch({type: actions.CREATE_POST, payload: data});
     } catch (error) {
-        console.log(error.message);
+        console.error(error.message);
     }
 }
 
@@ -53,7 +53,7 @@ export const getPostWithId = (id) => async (dispatch) => {
 
         dispatch({type: actions.GET_POST_WITH_ID, payload: data})
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
     }
 }
 
@@ -63,7 +63,7 @@ export const deletePost = (id) => async (dispatch) => {
 
         dispatch({type: actions.DELETE_POST, payload: id});
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -73,7 +73,7 @@ export const updatePost = (id, updatedPost) => async (dispatch) => {
 
         dispatch({type: actions.UPDATE_POST, payload: data});
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -84,6 +84,6 @@ export const likePost = (id) => async(dispatch) => {
 
         dispatch({type: actions.LIKE, payload:data})
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }

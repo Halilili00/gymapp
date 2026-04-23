@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Button,
   FormControl,
@@ -11,9 +12,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import FileBase from "react-file-base64";
-
-import React, { useEffect, useState } from "react";
 import ExerciseTable from "../components/toolbox/ExerciseTable";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../redux/actions/postActions";
@@ -53,7 +51,6 @@ const Form = () => {
       [name]: value,
     };
     setPost(changedPost);
-    console.log(post);
   };
 
   const handleExercise = () => {
@@ -76,14 +73,14 @@ const Form = () => {
   };
 
   useEffect(() => {
-    if(param.id && postToUpdate._id){
+    if (param.id && postToUpdate._id) {
       setPost(postToUpdate)
     }
-  },[postToUpdate, param.id])
+  }, [postToUpdate, param.id])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(param.id){
+    if (param.id) {
       dispatch(updatePost(post._id, post))
       alert("Post is updated!");
     }
@@ -94,14 +91,21 @@ const Form = () => {
     }
   };
 
-  const renderLogin = () => {
-    return (
-      <Paper style={{ padding: "50px", marginTop: "20px" }}>
-        <Typography variant="h3" align="center">
-          Please Sign In to create new post
-        </Typography>
-      </Paper>
-    );
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0]; // Haetaan valittu tiedosto
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file); // Muunnettaan Base64-muotoon
+
+    reader.onload = () => {
+      // Asetetaan Base64-merkkijono tilaan (state)
+      setPost({ ...post, selectedFile: reader.result });
+    };
+
+    reader.onerror = (error) => {
+      console.error("Virhe tiedoston lukemisessa: ", error);
+    };
   };
 
   const renderForm = () => {
@@ -146,11 +150,12 @@ const Form = () => {
             rows={3}
             onChange={handleChange}
           />
-          <FileBase
-            type="img"
+          {!postToUpdate?.selectedFile && <input
+            type="file"
+            accept="image/*"
             multiple={false}
-            onDone={({ base64 }) => setPost({ ...post, selectedFile: base64 })}
-          />
+            onChange={handleFileUpload}
+          />}
           <FormControl style={{ margin: "10px 0 10px 0" }} fullWidth>
             <FormLabel>Category</FormLabel>
             <RadioGroup
@@ -162,7 +167,7 @@ const Form = () => {
               <FormControlLabel
                 value="Full body"
                 required
-                control={<Radio required/>}
+                control={<Radio required />}
                 label="Full body"
               />
               <FormControlLabel
@@ -203,7 +208,7 @@ const Form = () => {
               label="Weight (kg)"
               onChange={handleChange}
             />
-            <Button variant="contained" fullWidth onClick={handleExercise} style={{marginTop: "10px"}}>
+            <Button variant="contained" fullWidth onClick={handleExercise} style={{ marginTop: "10px" }}>
               Add exercise
             </Button>
           </Paper>
@@ -222,7 +227,7 @@ const Form = () => {
     );
   };
 
-  return <div>{user ? renderForm() : <Alert message={"Please Sign In to create new post"}/>}</div>;
+  return <div>{user ? renderForm() : <Alert message="Please Sign In to create new post" />}</div>;
 };
 
 export default Form;

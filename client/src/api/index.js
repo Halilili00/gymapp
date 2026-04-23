@@ -1,19 +1,18 @@
 import axios from "axios"
 
-const API = axios.create({baseURL: 'https://fitnessblog-server.onrender.com'})
-//const API = axios.create({baseURL: 'http://localhost:5000'})
+const API = axios.create({ baseURL: `${import.meta.env.VITE_API_URL}` })
 
 API.interceptors.request.use((req) => {
-    if (localStorage.getItem('profile')) {
-      req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
-    }
-  
-    return req;
-  });
+  if (localStorage.getItem('profile')) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+  }
+
+  return req;
+});
 
 export const getPosts = (sort) => API.get(`/posts?sort=${sort}`);
 export const getUserPostWithId = (id) => API.get(`/posts/${id}/userProfile`);
-export const getAllPosts = (id,sort) => API.get(`/posts/${id}/allPosts?sort=${sort}`);
+export const getAllPosts = (id, sort) => API.get(`/posts/${id}/allPosts?sort=${sort}`);
 export const createPost = (newPost) => API.post('/posts', newPost);
 export const getPostWithId = (id) => API.get(`/posts/${id}/post`);
 export const deletePost = (id) => API.delete(`/posts/${id}`);

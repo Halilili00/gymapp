@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { Grid, InputAdornment, TextField, } from "@mui/material";
+import { Grid, InputAdornment, TextField } from "@mui/material";
 import PostCard from "./PostCard";
 import Loading from "./toolbox/Loading";
 import SearchIcon from '@mui/icons-material/Search';
@@ -28,45 +28,50 @@ const Exercises = ({ sort, setSort }) => {
     }
   })
 
-  console.log(findPosts)
   return (
     <Grid container>
-      {findPosts.length>0 && <Grid item xs={12} mb={1}>
+      {findPosts.length > 0 && <Grid size={12} style={{ marginBottom: '8px' }}>
         <TextField
-          style={{ backgroundColor: "whitesmoke", borderRadius: "20px", margin: "15px 0px 0px 0px" }}
+          style={{ backgroundColor: "whitesmoke", borderRadius: "20px", margin: "15px 0px 0px 0px", border: '20px' }}
           type="search"
           label="Search posts with title"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           fullWidth
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon fontSize="large" color="primary" />
-              </InputAdornment>
-            )
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon fontSize="large" color="primary" />
+                </InputAdornment>
+              )
+            },
+          }}
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
           }}
         />
       </Grid>}
-      <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
+      <Grid size={12} style={{ display: "flex", justifyContent: 'flex-end' }}>
         {sort ? <Sort sort={sort} setSort={setSort} /> : null}
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Grid
           container
-          alignItems="stretch"
           style={{ display: "flex", alignItems: "center" }}
           spacing={3}
         >
           {isLoading ? Array.from(new Array(3)).map((post, index) =>
-            <Grid item key={index} xs={12} sm={4}>
+            <Grid key={index} size={{ xs: 12, sm: 4 }}>
               <div>Loading..</div><Loading />
             </Grid>
           ) : findPosts.length ? findPosts.map(post =>
-            <Grid item key={post._id} xs={12} sm={4}>
-              {post ? <PostCard post={post} /> : <><div>Loading..</div><Loading /></>}
+            <Grid key={post._id} size={{ xs: 12, sm: 4 }}>
+              <PostCard post={post} />
             </Grid>) :
-            <Grid item sx={{ width: '100%', marginBottom: 5 }}>
+            <Grid size={12} style={{ marginBottom: 5 }}>
               <Alert message={"You don't have post!"} />
             </Grid>
           }
